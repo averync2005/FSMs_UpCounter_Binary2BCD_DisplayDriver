@@ -27,17 +27,11 @@ module Displayed_Multi_Digit_Counter (
 );
 
 
-
-
-
     // Internal Signal Declarations
     wire clk_slow;  // 1 Hz clock for counter
     wire clk_display;  // 1 kHz clock for display refresh
     wire [11:0] count_wire;  // 12-bit counter output (0â€“4095)
     wire [15:0] bcd_wire;  // 16-bit BCD output from converter
-
-
-
 
 
     // Clock Divider Instantiations
@@ -54,9 +48,6 @@ module Displayed_Multi_Digit_Counter (
         .rst(rst),
         .clock_out(clk_slow)
     );
-    
-
-
 
 
     // 12-Bit Up Counter
