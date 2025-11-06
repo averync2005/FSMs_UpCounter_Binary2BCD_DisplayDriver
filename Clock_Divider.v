@@ -19,16 +19,25 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module Clock_Divider(clock_in, clock_out);
-    input clock_in;
-    output reg clock_out = 1'b0;
-    reg [1:0] counter = 2'd0;
-    
-    always @(posedge clock_in) begin
-        counter <= counter + 1;
-        if (counter == 2'b01) begin
-            clock_out <= ~clock_out;  // Toggle the output clock
-            counter <= 0;
+module Clock_Divider #(parameter DIVIDE = 49_999) (
+    input clock_in,  // Input clock (100 MHz)
+    input rst,  // Active-high reset
+    output reg clock_out  // Divided output clock
+);
+
+    reg [31:0] counter = 0;  // Safe 32-bit counter for any divide value
+
+    always @(posedge clock_in or posedge rst) begin
+        if (rst) begin
+            counter   <= 0;
+            clock_out <= 1'b0;
+        end
+        else if (counter == DIVIDE) begin  // Can also use ">="
+            counter   <= 0;
+            clock_out <= ~clock_out;  // Toggle output when count reached
+        end
+        else begin
+            counter <= counter + 1'b1;  // Increment counter each clock
         end
     end
 endmodule
