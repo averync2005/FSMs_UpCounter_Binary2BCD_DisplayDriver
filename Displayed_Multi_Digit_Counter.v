@@ -20,9 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Displayed_Multi_Digit_Counter (
-    input clk,                // 100 MHz Basys3 clock input
-    input rst,                // active-high reset
-    output [3:0] seg_anode,   // 4 anode signals (active-low)
+    input clk,  // 100 MHz Basys3 clock input
+    input rst,  // active-high reset
+    output [3:0] seg_anode,  // 4 anode signals (active-low)
     output [6:0] seg_cathode  // 7 cathode signals (active-low)
 );
 
@@ -30,7 +30,7 @@ module Displayed_Multi_Digit_Counter (
     // Internal Signal Declarations
     wire clk_slow;  // 1 Hz clock for counter
     wire clk_display;  // 1 kHz clock for display refresh
-    wire [11:0] count_wire;  // 12-bit counter output (0â€“4095)
+    wire [11:0] count_wire;  // 12-bit counter output
     wire [15:0] bcd_wire;  // 16-bit BCD output from converter
 
 
